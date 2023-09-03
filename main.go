@@ -10,7 +10,6 @@ import (
 func main() {
 	magicApp := app.New()
 	magicTheme := theme.MyTheme{}
-	magicTheme.SetFonts("./data/font.ttf", "")
 	magicApp.Settings().SetTheme(&magicTheme)
 	magicWindow := magicApp.NewWindow("Magic Wechat")
 
