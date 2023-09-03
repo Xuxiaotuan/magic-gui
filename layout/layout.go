@@ -4,7 +4,8 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"strings"
+	"magic-gui/widgets"
+	"time"
 )
 
 var (
@@ -16,21 +17,17 @@ func NewLayout(window fyne.Window) *container.Split {
 	filePathInput := widget.NewMultiLineEntry()
 	keyOutput := widget.NewEntry()
 	filePathOutput := widget.NewEntry()
+	generateButton := widgets.GenerateButton(sourceInput, filePathInput)
+	runButton := widgets.RunButton(sourceInput, filePathInput)
 
-	generateButton := widget.NewButton("点我生成密钥", func() {
-		source := sourceInput.Text
-		var data []string
-		if source != "" {
-			for _, line := range strings.Split(source, "\n") {
-				fields := strings.Fields(line)
-				for _, field := range fields[1:] {
-					data = append(data, strings.ReplaceAll(field, "0x", ""))
-				}
-			}
+	progress := widget.NewProgressBar()
+
+	go func() {
+		for i := 0.0; i <= 1.0; i += 0.01 {
+			time.Sleep(time.Millisecond * 250)
+			progress.SetValue(i)
 		}
-		key := "0x" + strings.Join(data, "")
-		keyOutput.SetText(key)
-	})
+	}()
 
 	navgater := container.NewVBox(
 		widget.NewLabel("请输入待解析的数据,举例 \n"+
@@ -43,6 +40,8 @@ func NewLayout(window fyne.Window) *container.Split {
 		filePathInput,
 		widget.NewLabel("请输入解密文件后存放的路径:"),
 		filePathOutput,
+		runButton,
+		progress,
 	)
 	page := container.NewHSplit(navgater, content)
 	page.SetOffset(0.3)
