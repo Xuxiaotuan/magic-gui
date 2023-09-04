@@ -5,7 +5,6 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 	"magic-gui/widgets"
-	"time"
 )
 
 var (
@@ -17,17 +16,9 @@ func NewLayout(window fyne.Window) *container.Split {
 	filePathInput := widget.NewMultiLineEntry()
 	keyOutput := widget.NewEntry()
 	filePathOutput := widget.NewEntry()
-	generateButton := widgets.GenerateButton(sourceInput, filePathInput)
-	runButton := widgets.RunButton(sourceInput, filePathInput)
-
+	generateButton := widgets.GenerateButton(sourceInput, keyOutput)
 	progress := widget.NewProgressBar()
-
-	go func() {
-		for i := 0.0; i <= 1.0; i += 0.01 {
-			time.Sleep(time.Millisecond * 250)
-			progress.SetValue(i)
-		}
-	}()
+	runButton := widgets.RunButton(progress)
 
 	navgater := container.NewVBox(
 		widget.NewLabel("请输入待解析的数据,举例 \n"+
