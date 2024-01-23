@@ -1,9 +1,11 @@
 package widgets
 
 import (
-	"fyne.io/fyne/v2/widget"
+	"fmt"
 	"strings"
 	"time"
+
+	"fyne.io/fyne/v2/widget"
 )
 
 func GenerateButton(sourceInput *widget.Entry, keyOutput *widget.Entry) *widget.Button {
@@ -23,9 +25,17 @@ func GenerateButton(sourceInput *widget.Entry, keyOutput *widget.Entry) *widget.
 	})
 }
 
-func RunButton(progress *widget.ProgressBar) *MyButton {
-	button := NewButton("点我开始进行解析同步", func() {
+func RunButton(progress *widget.ProgressBar, input *widget.Entry, pathInput *widget.Entry) *MyButton {
+	return NewButton("点我开始进行解析同步", func() {
 		go func() {
+			if len(input.Text) == 0 {
+				fmt.Println("电脑中的文件路径为空")
+			}
+			if len(pathInput.Text) == 0 {
+				fmt.Println("解密后文件存放的路径为空")
+			}
+			fmt.Printf("%s", input.Text)
+			fmt.Printf("%s", pathInput.Text)
 			progress.SetValue(0.0)
 			for i := 0.0; i <= 1.0; i += 0.1 {
 				time.Sleep(time.Millisecond * 250)
@@ -33,5 +43,4 @@ func RunButton(progress *widget.ProgressBar) *MyButton {
 			}
 		}()
 	})
-	return button
 }
