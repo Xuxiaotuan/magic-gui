@@ -16,6 +16,7 @@ func CovertMp4ToMp3(source string, target string) {
 		Output(target).
 		OverWriteOutput().ErrorToStdOut().Run()
 	if err != nil {
+		println("covertMp4ToMp3 finished successfully")
 		return
 	}
 }
