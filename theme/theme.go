@@ -7,23 +7,23 @@ import (
 	"image/color"
 )
 
-type MyTheme struct{}
+type XxtTheme struct{}
 
-var _ fyne.Theme = (*MyTheme)(nil)
+var _ fyne.Theme = (*XxtTheme)(nil)
 
 // return bundled font resource
 // resourceFontTtf 即是 bundle.go 文件中 var 的变量名
-func (m MyTheme) Font(s fyne.TextStyle) fyne.Resource {
+func (m XxtTheme) Font(s fyne.TextStyle) fyne.Resource {
 	return resourceFontTtf
 }
-func (*MyTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
+func (*XxtTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
 	return theme.DefaultTheme().Color(n, v)
 }
 
-func (*MyTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
+func (*XxtTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
 	return theme.DefaultTheme().Icon(n)
 }
 
-func (*MyTheme) Size(n fyne.ThemeSizeName) float32 {
+func (*XxtTheme) Size(n fyne.ThemeSizeName) float32 {
 	return theme.DefaultTheme().Size(n)
 }

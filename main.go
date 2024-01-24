@@ -10,13 +10,15 @@ import (
 
 func main() {
 	magicApp := app.New()
-	magicTheme := theme.MyTheme{}
+	magicTheme := theme.XxtTheme{}
 	magicApp.Settings().SetTheme(&magicTheme)
 	magicWindow := magicApp.NewWindow("Magic Wechat")
 	magicWindow.Resize(fyne.NewSize(800, 600))
 	magicWindow.CenterOnScreen()
 
+	// 设置布局
 	layout.NewLayout(magicWindow)
 
+	// 常驻服务
 	magicWindow.ShowAndRun()
 }
