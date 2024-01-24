@@ -12,7 +12,7 @@ func main() {
 	magicApp := app.New()
 	magicTheme := theme.XxtTheme{}
 	magicApp.Settings().SetTheme(&magicTheme)
-	magicWindow := magicApp.NewWindow("Magic Wechat")
+	magicWindow := magicApp.NewWindow("Magic Downloads")
 	magicWindow.Resize(fyne.NewSize(800, 600))
 	magicWindow.CenterOnScreen()
 
