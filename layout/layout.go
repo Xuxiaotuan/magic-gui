@@ -13,30 +13,29 @@ var (
 )
 
 func NewLayout(window fyne.Window) {
+	// 下载视频
 	sourceInput := widget.NewMultiLineEntry()
-	filePathInput := widget.NewMultiLineEntry()
-	keyOutput := widget.NewEntry()
+	ytlpPathInput := widget.NewMultiLineEntry()
+	outVideoPathInput := widget.NewMultiLineEntry()
+	generateButton := widgets.GenerateButton(sourceInput, ytlpPathInput, outVideoPathInput)
+
+	// 转换视频
+	ffmpegResultPathInput := widget.NewMultiLineEntry()
 	filePathOutput := widget.NewEntry()
-	generateButton := widgets.GenerateButton(sourceInput, keyOutput)
-	progress := widget.NewProgressBar()
-	runButton := widgets.RunButton(progress, sourceInput, filePathInput)
+	runButton := widgets.RunButton(window, outVideoPathInput, ffmpegResultPathInput)
 
 	navgater := container.NewVBox(
-		widget.NewLabel("请输入待解析的数据,举例 \n"+
-			"0x600007936780: 0xdc 0x8a 0xb2 0x78 0x9a 0x66 0x41 0x79   \n"+
-			"0x600007936788: 0xad 0x34 0xd1 0xb2 0x3b 0x82 0x73 0x89   \n"+
-			"0x600007936790: 0xc6 0x31 0x8a 0xbe 0x2d 0x62 0x4f 0x05   \n"+
-			"0x600007936798: 0xa7 0xac 0xb7 0xf7 0xa9 0x17 0x36 0xe0"),
+		widget.NewLabel("需要输入要下载的视频链接，比如 \n"+
+			"https://www.youtube.com/watch?v=jgVhBThJdXc"),
 		sourceInput,
+		widget.NewLabel("需要手动下载yt-dlp的文件，并给出文件路径:"),
+		ytlpPathInput,
+		widget.NewLabel("转换后视频想变成什么样呢： 比如： /Users/xjw/software/可惜我是水瓶座伴奏【杨千嬅】 [BV1Fv4y1c7in_p1].mp4"),
+		outVideoPathInput,
 		generateButton,
-		widget.NewLabel("生成的微信key:"),
-		keyOutput,
-		widget.NewLabel("请输入电脑中的路径:"),
-		filePathInput,
-		widget.NewLabel("请输入解密文件后存放的路径:"),
+		widget.NewLabel("请输入转换后文件存放的路径:"),
 		filePathOutput,
 		runButton,
-		progress,
 	)
 	page := container.NewHSplit(navgater, content)
 	page.SetOffset(0.3)
