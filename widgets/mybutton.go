@@ -31,7 +31,7 @@ func XxtButton(label string, tapped func()) *MagicButton {
 	button := &MagicButton{}
 	button.Text = label
 	button.OnTapped = tapped
-	button.Alignment = 1
+	button.Alignment = 0
 
 	button.ExtendBaseWidget(button)
 	return button

@@ -1,21 +1,16 @@
-package layout
+package common
 
 import (
-	"magic-gui/widgets"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"magic-gui/widgets"
 )
 
-var (
-	content = container.NewStack()
-)
-
-func NewLayout(window fyne.Window) {
+func download(window fyne.Window) fyne.CanvasObject {
 	// 下载视频
 	sourceInput := widget.NewMultiLineEntry()
-	ytlpPathInput := widget.NewMultiLineEntry()
+	ytlpPathInput := widget.NewEntry()
 	outVideoPathInput := widget.NewMultiLineEntry()
 	generateButton := widgets.GenerateButton(sourceInput, ytlpPathInput, outVideoPathInput)
 
@@ -23,7 +18,7 @@ func NewLayout(window fyne.Window) {
 	ffmpegResultPathInput := widget.NewMultiLineEntry()
 	runButton := widgets.RunButton(window, outVideoPathInput, ffmpegResultPathInput)
 
-	navgater := container.NewVBox(
+	return container.NewVBox(
 		widget.NewLabel("需要输入要下载的视频链接，比如: \n"+
 			"https://www.youtube.com/watch?v=jgVhBThJdXc"),
 		sourceInput,
@@ -38,9 +33,6 @@ func NewLayout(window fyne.Window) {
 			"/Users/xjw/software/111.mp3"),
 		ffmpegResultPathInput,
 		runButton,
+		widget.NewLabel(""), // balance the header on the tutorial screen we leave blank on this content
 	)
-	page := container.NewHSplit(navgater, content)
-	page.SetOffset(0.1)
-
-	window.SetContent(page)
 }
